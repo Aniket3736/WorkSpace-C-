@@ -1,0 +1,114 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
+#pragma GCC optimize("unroll-loops")
+#include <bits/stdc++.h> 
+#include <complex>
+#include <queue>
+#include <set>
+#include <unordered_set>
+#include <list>
+#include <chrono>
+#include <random>
+#include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <string>
+#include <vector>
+#include <map>
+#include <unordered_map>
+#include <stack>
+#include <iomanip>
+#include <fstream>
+ 
+using namespace std;
+ 
+typedef long long ll;
+typedef long double ld;
+ll MOD = 1000000007;
+int all8[][2] = {{0,1},{0,-1},{1,0},{-1,0},{1,1},{-1,-1},{1,-1},{-1,1}};
+int all4[][2] = {{0,1},{1,0},{-1,0},{0,-1}};
+double eps = 1e-12;
+#define forn(i,e) for(ll i = 0; i < e; i++)
+#define forsn(i,s,e) for(ll i = s; i < e; i++)
+#define rforn(i,s) for(ll i = s; i >= 0; i--)
+#define rforsn(i,s,e) for(ll i = s; i >= e; i--)
+#define mp make_pair
+#define pb push_back
+#define fi first
+#define se second
+#define INF 2e18
+#define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
+#define all(x) (x).begin(), (x).end()
+#define sz(x) ((ll)(x).size())
+#ifndef ONLINE_JUDGE
+#define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
+#else
+#define debug(x)
+#endif
+ 
+void _print(long long int t) {cerr << t;}
+void _print(int t) {cerr << t;}
+void _print(string t) {cerr << t;}
+void _print(char t) {cerr << t;}
+void _print(long double t) {cerr << t;}
+void _print(double t) {cerr << t;}
+void _print(unsigned long long int t) {cerr << t;}
+
+template <class T, class V> void _print(pair <T, V> p);
+template <class T> void _print(vector <T> v);
+template <class T> void _print(set <T> v);
+template <class T, class V> void _print(map <T, V> v);
+template <class T> void _print(multiset <T> v);
+template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+ 
+
+void solve(){
+    int n; cin>>n;
+    long long arr[n],k = 1,j = n-2;
+    long long sum = 0;
+    for(int i = 0; i<n; i++) cin>>arr[i], sum+= arr[i];
+    long long sum1 = arr[0];
+    if(sum %3 || n < 3){
+        cout<<0;
+        return;
+    }
+    sum /= 3;
+    while(sum1 != sum && k < n) sum1 += arr[k++];
+    sum1 = arr[n-1];
+    while(sum1 != sum && j >= 0) sum1 += arr[j--];
+    sum1 = 0;
+    if(k > j || (k == j && arr[k] != sum)){
+        cout<<0;
+        return;
+    }
+    int count1 = 1, count2 = 1;
+    for(int i = j; i>=k; i--){
+        sum1 += arr[i];
+        if(sum1 == 0) count2 ++;
+    }
+    sum1 = 0;
+    for(int i = k; i<= j; i++){
+        sum1 += arr[i];
+        if(sum1 == 0) count1 ++;
+    }
+    if(sum == 0){
+        count1--;
+        cout<<(1LL*count1*(count1+1))/2;
+    }
+    else cout<<1LL*count1*count2;
+}
+int main()
+{
+ fast_cin();
+//#ifndef ONLINE_JUDGE
+//freopen("input.txt", "r", stdin);
+//freopen("output.txt", "w", stdout);
+//freopen("error.txt", "w", stderr);
+//#endif
+     solve();
+ return 0;
+}

@@ -1,0 +1,10 @@
+Dead users are as follows :
+4
+5
+Sequence is :
+5
+4
+3
+2
+1
+0
